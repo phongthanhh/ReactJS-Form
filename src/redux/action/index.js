@@ -1,4 +1,12 @@
-import { PUSH_USER, SAVE_DATA_FORM, VIEW_DETAIL_USER } from "../constants"
+import { DEL_USER, PUSH_USER, SAVE_DATA_FORM, UPDATE_USER, VIEW_DETAIL_USER } from "../constants"
+
+export const saveDataForm = (payload) => {
+    return {
+        type: SAVE_DATA_FORM,
+        payload,
+
+    }
+}
 
 export const pushUser = (payload) => {
     return {
@@ -14,10 +22,19 @@ export const viewDetailUser = (payload) => {
     }
 }
 
-export const saveDataForm = (payload) => {
+export const updateUser = (payload) => {
     return {
-        type: SAVE_DATA_FORM,
+        type: UPDATE_USER,
         payload,
 
     }
 }
+
+export const delUser = (payload) => {
+    return {
+        type: DEL_USER,
+        payload,
+
+    }
+}
+

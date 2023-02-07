@@ -87,11 +87,11 @@ export default function Register() {
                         </div>
                     </div>
                     <div className="py-3">
-                        <button className='btn btn-info mr-3'>Thêm </button>
-                        <button onClick={(e) => {
+                        <button className=' btn btn-info mr-3'>Thêm </button>
+                        {/* <button onClick={(e) => {
 
                         }} className='btn btn-info mr-3'>Update</button>
-                        <button type='reset' className='btn btn-danger'>Reset</button>
+                        <button type='reset' className='btn btn-danger'>Reset</button> */}
                     </div>
                 </form>
             </div>

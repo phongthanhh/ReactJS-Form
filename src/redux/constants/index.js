@@ -1,3 +1,5 @@
+export const SAVE_DATA_FORM = 'SAVE_DATA_FORM'
 export const PUSH_USER = 'PUSH_USER'
 export const VIEW_DETAIL_USER = 'VIEW_DETAIL_USER'
-export const SAVE_DATA_FORM = 'SAVE_DATA_FORM'
+export const UPDATE_USER = 'UPDATE_USER'
+export const DEL_USER = 'DEL_USER'

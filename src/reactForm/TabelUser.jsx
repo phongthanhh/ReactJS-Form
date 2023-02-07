@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { viewDetailUser } from '../redux/action'
+import { delUser, viewDetailUser } from '../redux/action'
 
 export default function TableUser() {
 
@@ -18,7 +18,9 @@ export default function TableUser() {
                 <td><button data-toggle="modal" data-target="#exampleModal" onClick={() => {
                     dispatch(viewDetailUser(user))
                 }} className='btn btn-info mr-2'>Xem</button>
-                    <button className='btn btn-danger'>Xóa</button>
+                    <button onClick={() => {
+                        dispatch(delUser(user))
+                    }} className='btn btn-danger'>Xóa</button>
                 </td>
             </tr>
         })
