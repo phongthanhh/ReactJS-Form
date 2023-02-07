@@ -25,30 +25,39 @@ const initialState = {
             sdt: '',
             email: '',
         },
-        errors: {
+        error: {
             maSV: '',
             hoTen: '',
             sdt: '',
             email: '',
-            isvalid: false
-        },
+        }
     }
 }
 
 export const ReactFormReducer = (state = initialState, action) => {
     const { type, payload } = action
+
     switch (type) {
+        case SAVE_DATA_FORM:
+            return {
+                ...state, user: {
+                    value: payload.newValues,
+                    error: payload.newError
+                }
+            }
+
         case PUSH_USER:
-            state.arrUser = [...state.arrUser, payload]
-            return { ...state }
+
+            return {
+                ...state, arrUser: [
+                    ...state.arrUser,
+                    payload
+                ]
+            }
+
         case VIEW_DETAIL_USER:
             return state
-        case SAVE_DATA_FORM:
-            state.user = {
-                values: payload.newValues,
-                errors: payload.newErrors
-            }
-            return { ...state }
+
         default:
             return state
     }

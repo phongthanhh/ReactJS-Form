@@ -2,61 +2,61 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { pushUser, saveDataForm } from '../redux/action'
 
-// const initValues = {
-//     value: {
-//         maSV: '',
-//         hoTen: '',
-//         sdt: '',
-//         email: '',
-//     },
-//     errors: {
-//         maSV: '',
-//         hoTen: '',
-//         sdt: '',
-//         email: '',
-//         isValid: false
-//     },
-// }
+
+
 export default function Register() {
+    // const [formValues, setFormValues] = useState({
+    //     maSV: '',
+    //     hoTen: '',
+    //     sdt: '',
+    //     email: '',
+    // })
 
     const dispatch = useDispatch()
 
     const { user } = useSelector(state => state.ReactFormReducer)
 
-    // const [formValues, setFormValues] = useState(user)
-
     const handelOnChange = (e) => {
         let { name, value } = e.target
-        console.log(name, value)
 
-        let newValues = { ...user.value }
-        newValues[name] = value
-        console.log(newValues)
+        // setFormValues((prev) => ({ ...prev, [name]: value }))
+
+        let newValues = { ...user.value, [name]: value }
+
         // ! Validate
         let messError = ''
-        if (value.trim() === '') {
-            messError = `${name} không được để trống !`
-        }
-        let regexp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-        if (name === 'email') {
-            if (!regexp.test(value)) {
-                messError = ` Email Không đúng định dạng!`
-            }
-        }
-        let newError = { ...user.errors }
-        newError[name] = messError
+        if (value.trim() === '') messError = `${name} không được để trống !`
 
-        dispatch(saveDataForm({ newValues: newValues, newError: newError }))
+        const regexp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        if (name === 'email') {
+            if (!regexp.test(value)) messError = ` Email Không đúng định dạng!`
+        }
+
+        let newError = { ...user.error, [name]: messError }
+
+        dispatch(saveDataForm({ newValues, newError }))
 
     }
-
 
     const handleSubmit = (e) => {
+        e.preventDefault()
+        let isValid = true
+        for (const property in user.error) {
+            if (user.error[property] !== '')
+                isValid = false
+        }
+
+        for (const property in user.value) {
+            if (user.value[property] === '')
+                isValid = false
+        }
+
+        if (isValid) dispatch(pushUser(user.value))
 
     }
-    // const { maSV, hoTen, sdt, email } = formValues
+
     const { maSV, hoTen, sdt, email } = user.value
-    const { errors } = user
+    const { error } = user
     return (
         <div className="row">
             <div className="col-12">
@@ -66,24 +66,24 @@ export default function Register() {
                         <div className="col">
                             <label htmlFor="">Mã SV</label>
                             <input value={maSV} name='maSV' onChange={handelOnChange} type="text" className="form-control" placeholder="Mã SV" />
-                            <p className='text-danger mt-2 mb-0'>{errors.maSV}</p>
+                            <p className='text-danger mt-2 mb-0'>{error.maSV}</p>
                         </div>
                         <div className="col">
                             <label htmlFor="">Họ tên</label>
                             <input value={hoTen} name='hoTen' onChange={handelOnChange} type="text" className="form-control" placeholder="Họ tên" />
-                            <p className='text-danger mt-2 mb-0'>{errors.hoTen}</p>
+                            <p className='text-danger mt-2 mb-0'>{error.hoTen}</p>
                         </div>
                     </div>
                     <div className="row py-2">
                         <div className="col">
                             <label htmlFor="">Số điện thoại</label>
                             <input value={sdt} name='sdt' onChange={handelOnChange} type="text" className="form-control" placeholder="Số điện thoại" />
-                            <p className='text-danger mt-2 mb-0'>{errors.sdt}</p>
+                            <p className='text-danger mt-2 mb-0'>{error.sdt}</p>
                         </div>
                         <div className="col">
                             <label htmlFor="">Email</label>
                             <input value={email} name='email' onChange={handelOnChange} type="text" className="form-control" placeholder="Email" />
-                            <p className='text-danger mt-2 mb-0'>{errors.email}</p>
+                            <p className='text-danger mt-2 mb-0'>{error.email}</p>
                         </div>
                     </div>
                     <div className="py-3">
