@@ -28,8 +28,18 @@ export default function TableUser() {
 
 
     return (
-        <div className="row">
+        <div className="row py-4">
             <div classname="col-12 py-5" style={{ width: '100%' }}>
+                <div style={{ paddingBottom: '20px' }}>
+                    <div>
+                        <label className='mr-2' htmlFor="site-search">Search the site:</label>
+                        <input onChange={(e) => {
+                            console.log(e.target.value)
+                        }} type="search" id="site-search" name="q" />
+                    </div>
+
+                </div>
+
                 <table className="table">
                     <thead className="thead-dark">
                         <tr >
