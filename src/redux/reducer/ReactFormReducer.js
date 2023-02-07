@@ -47,7 +47,6 @@ export const ReactFormReducer = (state = initialState, action) => {
             }
 
         case PUSH_USER:
-
             return {
                 ...state, arrUser: [
                     ...state.arrUser,
@@ -56,7 +55,12 @@ export const ReactFormReducer = (state = initialState, action) => {
             }
 
         case VIEW_DETAIL_USER:
-            return state
+            return {
+                ...state, user: {
+                    ...state.user,
+                    value: payload
+                }
+            }
 
         default:
             return state

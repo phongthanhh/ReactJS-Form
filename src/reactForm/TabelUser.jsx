@@ -6,6 +6,8 @@ export default function TableUser() {
 
     const { arrUser } = useSelector(state => state.ReactFormReducer)
     const dispatch = useDispatch()
+
+
     const renderTable = () => {
         return arrUser.map(user => {
             return <tr key={user.maSV}>
@@ -21,6 +23,8 @@ export default function TableUser() {
             </tr>
         })
     }
+
+
     return (
         <div className="row">
             <div classname="col-12 py-5" style={{ width: '100%' }}>
